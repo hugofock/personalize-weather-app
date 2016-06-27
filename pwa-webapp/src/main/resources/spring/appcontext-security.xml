@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <security:http pattern="/access" security="none"/>
+    <security:http use-expressions="true" entry-point-ref="formEntryPoint">
+        <security:intercept-url access="hasRole('ROLE_ADMIN')" pattern="/admin/**"/>
+
+        <security:access-denied-handler ref="accessDeniedHandler"/>
+        <security:logout logout-url="/logout" logout-success-url="/access"/>
+
+        <security:custom-filter ref="formAuthenticationFilter" position="FORM_LOGIN_FILTER"/>
+
+        <security:csrf disabled="true"/>
+    </security:http>
+
+    <bean id="formEntryPoint" name="formEntryPoint"
+          class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <constructor-arg index="0" value="/access"/>
+    </bean>
+
+    <bean id="formAuthenticationFilter" name="formAuthenticationFilter"
+          class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="authenticationSuccessHandler" ref="authSuccessHandler"/>
+        <property name="authenticationFailureHandler" ref="authFailureHandler"/>
+        <property name="filterProcessesUrl" value="/authenticate"/>
+    </bean>
+
+    <security:authentication-manager alias="authenticationManager" id="authenticationManager">
+        <security:authentication-provider user-service-ref="customUserDetailsService">
+            <security:password-encoder hash="sha-256"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <bean id="authFailureHandler" name="authFailureHandler"
+          class="com.pwa.security.handler.CustomAuthenticationFailureHandler">
+    </bean>
+
+    <bean id="authSuccessHandler" name="authSuccessHandler"
+          class="com.pwa.security.handler.CustomAuthenticationSuccessHandler">
+    </bean>
+
+    <bean id="accessDeniedHandler" name="accessDeniedHandler"
+          class="com.pwa.security.handler.CustomAccessDeniedHandlerImpl">
+    </bean>
+
+</beans>
