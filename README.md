@@ -4,24 +4,16 @@ This is a sample application to check the real-time weather information for diff
 ## Frameworks
 
 ### Front-end
--Twitter Bootstrap
--AngularJS
+Twitter Bootstrap, AngularJS
 
 ### Back-end
--Spring Framework (4.2.6.RELEASE)
--Spring Data JPA (1.9.1.RELEASE)
--Spring Web MVC (4.2.6 RELEASE)
--Spring Security (4.0.3.RELEASE)
--Hibernate (4.2.21.Final)
--Hibernate Validator (5.3.0.Alpha1)
+Spring Framework (4.2.6.RELEASE), Spring Data JPA (1.9.1.RELEASE), Spring Web MVC (4.2.6 RELEASE), Spring Security (4.0.3.RELEASE), Hibernate (4.2.21.Final), Hibernate Validator (5.3.0.Alpha1)
 
 ### Testing Framework
--Mockito (1.9.5)
--Junit (4.11)
--Spring Framework (4.2.6.RELEASE)
+Mockito (1.9.5), Junit (4.11), Spring Framework (4.2.6.RELEASE)
 
 ### Build Tool
--Maven (3.3.9)
+Maven (3.3.9)
 
 ## Installation
 Installation is easy, first you can run Maven to clean and install to your local repository:

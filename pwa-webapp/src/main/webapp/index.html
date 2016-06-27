@@ -1,46 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" href="./bower_components/bootstrap-css-only/css/bootstrap.min.css" />
-  </head>
-  <body ng-app="myApp">
-    <div class="container" ng-controller="AppController">
-      <div class="page-header">
-        <h1>A checklist</h1>
-      </div>
-      <div class="alert alert-info" role="alert" ng-hide="items &amp;&amp; items.length > 0">
-        There are no items yet.
-      </div>
-      <form class="form-horizontal" role="form" ng-submit="addItem(newItem)">
-        <div class="form-group" ng-repeat="item in items">
-          <div class="checkbox col-xs-9">
-            <label>
-              <input type="checkbox" ng-model="item.checked" ng-change="updateItem(item)"/> {{item.description}}
-            </label>
-          </div>
-          <div class="col-xs-3">
-            <button class="pull-right btn btn-danger" type="button" title="Delete"
-              ng-click="deleteItem(item)">
-              <span class="glyphicon glyphicon-trash"></span>
-            </button>
-          </div>
+    <head>
+        <link rel="stylesheet" href="./bower_components/bootstrap-css-only/css/bootstrap.min.css" />
+    </head>
+    <body ng-app="myApp">
+        <div class="container" ng-controller="AppController">
+            <div class="page-header">
+                <h1>Personalize Weather Application</h1>
+            </div>
+            <div class="alert alert-danger" role="alert" ng-show="infoError">
+                {{infoError}}
+            </div>
+
+            <div class="container bor">
+                <select name="cityName" class="form-control" ng-model="formData.selectedCityName" required>
+                    <option disabled value="">- Select City -</option>
+                    <option ng-repeat="city in cityName" value="{{ city.name }}">{{ city.name }}</option>
+                </select>
+            </div>
+            <div class="container col-xs-12">
+                <button class="pull-right btn btn-info" type="button" title="Search"
+                        ng-click="onWeatherFind()">
+                    <span class="glyphicon glyphicon-ok-circle"></span>
+                </button>
+            </div>
+            <div class="container">
+                <h2>{{ weatherInfo.name }} Weather</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>City</th>
+                            <th>Updated time</th>
+                            <th>Weather</th>
+                            <th>Temperature</th>
+                            <th>Wind</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-show="weatherInfo">
+                        <tr>
+                            <td>{{ weatherInfo.name }}</td>
+                            <td>{{ weatherInfo.dt * 1000 | date:'EEEE, MMMM d, y hh:mm a'}}</td>
+                            <td>{{ weatherInfo.weather[0].description }}</td>
+                            <td>{{ weatherInfo.main.temp }}&#8451;</td>
+                            <td>{{ weatherInfo.wind.speed * 3.6 | number:2}}km/h</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <hr />
-        <div class="input-group">
-          <input type="text" class="form-control" ng-model="newItem" placeholder="Enter the description..." />
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="submit" ng-disabled="!newItem" title="Add">
-              <span class="glyphicon glyphicon-plus"></span>
-            </button>
-          </span>
-        </div>
-      </form>
-    </div>
-    <script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
-    <script type="text/javascript" src="./bower_components/angular-resource/angular-resource.min.js"></script>
-    <script type="text/javascript" src="./bower_components/lodash/dist/lodash.min.js"></script>
-    <script type="text/javascript" src="app/app.js"></script>
-    <script type="text/javascript" src="app/controllers.js"></script>
-    <script type="text/javascript" src="app/services.js"></script>
-  </body>
+        <script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="./bower_components/angular-resource/angular-resource.min.js"></script>
+        <script type="text/javascript" src="app/app.js"></script>
+        <script type="text/javascript" src="app/controllers.js"></script>
+        <script type="text/javascript" src="app/services.js"></script>
+    </body>
 </html>

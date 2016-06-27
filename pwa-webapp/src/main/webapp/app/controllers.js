@@ -1,30 +1,45 @@
 (function(angular) {
-  var AppController = function($scope, Item) {
-    Item.query(function(response) {
-      $scope.items = response ? response : [];
-    });
-    
-    $scope.addItem = function(description) {
-      new Item({
-        description: description,
-        checked: false
-      }).$save(function(item) {
-        $scope.items.push(item);
-      });
-      $scope.newItem = "";
+    var AppController = function($scope, $http) {
+
+        $scope.foundWeather = false;
+
+        $scope.infoError = "";
+
+        $http.get('/services/weather/findAllCity').success(function(data) {
+            if (data.status === "Success") {
+                $scope.cityName = data.object;
+            }
+            else if (data.status === "Failure") {
+                $scope.infoError = data.message;
+            } else {
+                $scope.infoError = "Unknown error";
+            }
+        });
+
+
+        $scope.onWeatherFind = function() {
+
+            if ($scope.formData) {
+                $scope.infoError = "";
+                $http.get('/services/weather/weatherInfo/' + $scope.formData.selectedCityName).success(function(data) {
+                    if (data.status === "Success") {
+                        $scope.weatherInfo = data.object;
+                    }
+                    else if (data.status === "Failure") {
+                        $scope.infoError = data.message;
+                    } else {
+                        $scope.infoError = "Unknown error";
+                    }
+                });
+            } else {
+                $scope.infoError = "Please select a city then click the search button";
+            }
+
+        };
+
     };
-    
-    $scope.updateItem = function(item) {
-      item.$update();
-    };
-    
-    $scope.deleteItem = function(item) {
-      item.$remove(function() {
-        $scope.items.splice($scope.items.indexOf(item), 1);
-      });
-    };
-  };
-  
-  AppController.$inject = ['$scope', 'Item'];
-  angular.module("myApp.controllers").controller("AppController", AppController);
+
+    AppController.$inject = ['$scope', '$http'];
+    angular.module("myApp.controllers").controller("AppController", AppController);
+
 }(angular));
