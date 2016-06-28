@@ -1,57 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="./bower_components/bootstrap-css-only/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/bower_components/bootstrap-css-only/css/bootstrap.css" />
     </head>
     <body ng-app="myApp">
-        <div class="container" ng-controller="AppController">
-            <div class="page-header">
-                <h1>Personalize Weather Application</h1>
-            </div>
-            <div class="alert alert-danger" role="alert" ng-show="infoError">
-                {{infoError}}
-            </div>
+        <div class="navbar-inner">
+            <a class="navbar-brand">Personalize Weather Application</a>
+        </div>
+        <div class="container" ng-controller="LoginCtrl">
+            <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="panel-title">Sign In</div>
+                    </div>
 
-            <div class="container bor">
-                <select name="cityName" class="form-control" ng-model="formData.selectedCityName" required>
-                    <option disabled value="">- Select City -</option>
-                    <option ng-repeat="city in cityName" value="{{ city.name }}">{{ city.name }}</option>
-                </select>
-            </div>
-            <div class="container col-xs-12">
-                <button class="pull-right btn btn-info" type="button" title="Search"
-                        ng-click="onWeatherFind()">
-                    <span class="glyphicon glyphicon-ok-circle"></span>
-                </button>
-            </div>
-            <div class="container">
-                <h2>{{ weatherInfo.name }} Weather</h2>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>City</th>
-                            <th>Updated time</th>
-                            <th>Weather</th>
-                            <th>Temperature</th>
-                            <th>Wind</th>
-                        </tr>
-                    </thead>
-                    <tbody ng-show="weatherInfo">
-                        <tr>
-                            <td>{{ weatherInfo.name }}</td>
-                            <td>{{ weatherInfo.dt * 1000 | date:'EEEE, MMMM d, y hh:mm a'}}</td>
-                            <td>{{ weatherInfo.weather[0].description }}</td>
-                            <td>{{ weatherInfo.main.temp }}&#8451;</td>
-                            <td>{{ weatherInfo.wind.speed * 3.6 | number:2}}km/h</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <div style="padding-top:30px" class="panel-body">
+
+                        <div ng-show="errorInfo" id="login-alert" class="alert alert-danger col-sm-12">{{ errorInfo }}</div>
+
+                        <form name="loginForm" class="form-horizontal" role="form" ng-submit="onLogin()" novalidate>
+
+                            <div style="margin-bottom: 25px" class="input-group"
+                                 ng-class="{ 'has-error' : loginForm.username.$invalid && !loginForm.username.$pristine }">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username"
+                                       ng-model="formData.username" required>
+                            </div>
+                            <div class="loginbox-textbox">
+                                <p ng-show="loginForm.username.$invalid && !loginForm.username.$pristine"
+                                   class="help-block alert-danger">Please enter a valid email address.</p>
+                            </div>
+
+                            <div style="margin-bottom: 25px" class="input-group"
+                                 ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="login-password" type="password" class="form-control" name="password" placeholder="password"
+                                       ng-model="formData.password" required>
+
+                            </div>
+                            <div class="loginbox-textbox">
+                                <p ng-show="loginForm.password.$invalid && !loginForm.password.$pristine"
+                                   class="help-block alert-danger">Please enter your password.</p>
+                            </div>
+                            <div style="margin-top:10px" class="form-group">
+                                <div class="col-sm-12 controls">
+                                    <input id="btn-login" type="submit" class="btn btn-success pull-right" value="Login"
+                                           ng-disabled="loginForm.$invalid" />
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
             </div>
         </div>
-        <script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
-        <script type="text/javascript" src="./bower_components/angular-resource/angular-resource.min.js"></script>
-        <script type="text/javascript" src="app/app.js"></script>
-        <script type="text/javascript" src="app/controllers.js"></script>
-        <script type="text/javascript" src="app/services.js"></script>
+        <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.min.js"></script>
+        <script type="text/javascript" src="/resources/global/js/app.js"></script>
+        <script type="text/javascript" src="/resources/login/js/controller.js"></script>
     </body>
 </html>

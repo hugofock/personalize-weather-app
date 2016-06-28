@@ -2,5 +2,3 @@
 **/*.iml
 **/target
 **/appengine-web.xml
-
-pwa-webapp/src/main/webapp/bower_components/**

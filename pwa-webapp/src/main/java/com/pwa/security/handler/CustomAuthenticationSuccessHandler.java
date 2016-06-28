@@ -40,7 +40,7 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
             if (authenticationList.size() == 1) {
                 String userRole = authenticationList.get(0).getAuthority();
                 if (userRole.equals(UserRoleCode.ROLE_ADMIN.name())) {
-                    basicResponseEntityVO.setUrl(constructAbsoluteUrl(request, "/admin"));
+                    basicResponseEntityVO.setUrl(constructAbsoluteUrl(request, "/weather"));
                 } else {
                     basicResponseEntityVO.setStatus(Status.FAILURE);
                     basicResponseEntityVO.setMessage("Error Authenticate");

@@ -5,9 +5,8 @@
              version="2.0">
 
     <persistence-unit name="WPA" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <mapping-file>META-INF/orm.xml</mapping-file>
-        <!--<class>com.pwa.model.City</class>-->
-        <!--<class>com.pwa.model.User</class>-->
     </persistence-unit>
 
 </persistence>

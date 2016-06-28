@@ -1,5 +1,6 @@
 package com.pwa.common.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pwa.common.util.ObjectUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Type;
@@ -15,21 +16,26 @@ public abstract class BaseEntity implements Serializable, IBaseEntity {
 
     private static final long serialVersionUID = 1L;
 
+    @JsonIgnore
     @Version
     @Column(name = "VERSION", length = 5, nullable = false)
     private Long version;
 
+    @JsonIgnore
     @Column(name = "CREATED_BY", length = 50, nullable = false)
     private String createdBy;
 
+    @JsonIgnore
     @Column(name = "CREATED_DATE", length = 50, nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime createdDate;
 
+    @JsonIgnore
     @Column(name = "LAST_MODIFIED_BY", length = 50, nullable = false)
     private String lastModifiedBy;
 
+    @JsonIgnore
     @Column(name = "LAST_MODIFIED_DATE", length = 50, nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")

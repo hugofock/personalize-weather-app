@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="/bower_components/bootstrap-css-only/css/bootstrap.css" />
+    </head>
+    <body ng-app="myApp">
+        <div class="container" ng-controller="AppController">
+            <div class="navbar-inner">
+                <p class="navbar-btn pull-right"><a href="/logout"><span title="Logout" class="btn btn-cust glyphicon glyphicon-log-out" style="font-size: 1.5em;"></span></a></p>
+            </div>
+            <div class="container page-header">
+                <h1 class="text-info">Personalize Weather Application</h1>
+            </div>
+            <div class="container alert alert-danger" role="alert" ng-show="infoError">
+                {{infoError}}
+            </div>
+
+            <div class="container input-group">
+                <select name="cityName" class="form-control" ng-model="formData.selectedCityName" required>
+                    <option disabled value="">- Select City -</option>
+                    <option ng-repeat="city in cityName" value="{{ city.name }}">{{ city.name }}</option>
+                </select>
+
+                <span class="input-group-btn col-lg-1">
+                    <button class="pull-right btn btn-info" type="button" title="Search"
+                            ng-click="onWeatherFind()">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                </span>
+            </div>
+            <div class="container">
+                <h2>{{ weatherInfo.name }} Weather</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>City</th>
+                            <th>Updated time</th>
+                            <th>Weather</th>
+                            <th>Temperature</th>
+                            <th>Wind</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-show="weatherInfo">
+                        <tr>
+                            <td>{{ weatherInfo.name }}</td>
+                            <td>{{ weatherInfo.dt * 1000 | date:'EEEE, MMMM d, y hh:mm a'}}</td>
+                            <td>{{ weatherInfo.weather[0].description }}</td>
+                            <td>{{ weatherInfo.main.temp }}&#8451;</td>
+                            <td>{{ weatherInfo.wind.speed * 3.6 | number:2}}km/h</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.min.js"></script>
+        <script type="text/javascript" src="/resources/global/js/app.js"></script>
+        <script type="text/javascript" src="/resources/weather/js/controllers.js"></script>
+    </body>
+</html>

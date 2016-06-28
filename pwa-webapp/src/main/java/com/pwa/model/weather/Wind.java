@@ -1,8 +1,11 @@
 package com.pwa.model.weather;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Wind {
 
     private String speed;
+    @JsonIgnore
     private String deg;
 
     public Wind() {

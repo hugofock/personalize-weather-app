@@ -9,9 +9,13 @@
             http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
             http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
-    <jpa:repositories base-package="com.pwa.repository"
-                      transaction-manager-ref="transactionManager"
-                      entity-manager-factory-ref="createEntitiyManagerFactory"/>
+    <jpa:repositories base-package="com.pwa.repository" />
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"/>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="WPA"/>
+    </bean>
 
     <context:component-scan base-package="com.pwa.service,
                                         com.pwa.security.service,
@@ -24,9 +28,5 @@
     <tx:annotation-driven proxy-target-class="true"/>
 
     <cache:annotation-driven/>
-
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="createEntitiyManagerFactory"/>
-    </bean>
 
 </beans>

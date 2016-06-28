@@ -1,10 +1,13 @@
 package com.pwa.model.weather;
 
-public class Weather {
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+public class Weather {
+    @JsonIgnore
     private String id;
     private String main;
     private String description;
+    @JsonIgnore
     private String icon;
 
     public Weather(String id, String main, String description, String icon) {

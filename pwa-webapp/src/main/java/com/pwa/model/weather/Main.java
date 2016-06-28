@@ -1,11 +1,17 @@
 package com.pwa.model.weather;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Main {
 
     private String temp;
+    @JsonIgnore
     private String pressure;
+    @JsonIgnore
     private String humidity;
+    @JsonIgnore
     private String temp_min;
+    @JsonIgnore
     private String temp_max;
 
     public Main(String temp, String pressure, String humidity, String temp_min, String temp_max) {
