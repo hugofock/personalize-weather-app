@@ -28,6 +28,7 @@
             <!--Integration Test Plugin-->
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.17</version>
                 <executions>
                     <execution>
                         <id>integration-test</id>
@@ -65,13 +66,13 @@
                             <value>${phantomjs.binary}</value>
                         </capability>
                     </webDriverCapabilities>
-                    <jsSrcDir>${basedir}/src/main/resources/static/app</jsSrcDir>
+                    <jsSrcDir>${basedir}/src/main/webapp/resources</jsSrcDir>
                     <jsTestSrcDir>${basedir}/src/test/javascript</jsTestSrcDir>
                     <preloadSources>
                         <source>${bower-components}/angular/angular.js</source>
                         <source>${bower-components}/angular-resource/angular-resource.js</source>
                         <source>${bower-components}/angular-mocks/angular-mocks.js</source>
-                        <source>${basedir}/src/main/resources/static/app/app.js</source>
+                        <source>${basedir}/src/main/webapp/resources/global/js/app.js</source>
                     </preloadSources>
                 </configuration>
             </plugin>

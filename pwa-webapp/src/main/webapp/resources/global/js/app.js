@@ -1,2 +1,2 @@
 'use strict';
-angular.module("myApp", ["ngResource"]);
+angular.module("pwaApp", ["ngResource"]);

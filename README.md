@@ -15,15 +15,21 @@ Mockito (1.9.5), Junit (4.11), Spring Framework (4.2.6.RELEASE)
 ### Build Tool
 Maven (3.3.9)
 
+### Cache Library
+Guava Cache (19.0)
+
 ## Installation
-Installation is easy, first you can run Maven to clean and install to your local repository:
+Installation is easy, first you can run Maven clean install terminal command:
 ```
 mvn clean install
 ```
 
-Then you can run aceess to pwa-webapp sub-module and jetty:run the Java Web application :
+Then you can jetty:run the sub-module project in order to startup the Web Application:
 ```
-cd pwa-webapp/
-mvn jetty:run
+mvn jetty:run -pl pwa-webapp
 ```
 
+Finally access the Web Application via URL:
+```
+http://localhost:8080/
+```

@@ -13,12 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/user")
 public class UserController extends BaseController {
 
-    private IUserService userService;
-
     @Autowired
-    public UserController(IUserService userService) {
-        this.userService = userService;
-    }
+    private IUserService userService;
 
     @RequestMapping(value = "/users", method = { RequestMethod.GET }, produces = MimeType.JSON)
     public ResponseEntity<Object> users() {

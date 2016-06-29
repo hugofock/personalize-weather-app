@@ -1,7 +1,5 @@
 'use strict';
-angular.module("myApp").controller("AppController", function($scope, $http) {
-
-    $scope.foundWeather = false;
+angular.module("pwaApp").controller("AppController", function($scope, $http) {
 
     $scope.infoError = "";
 

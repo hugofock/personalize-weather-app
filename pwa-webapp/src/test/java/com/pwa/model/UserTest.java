@@ -2,7 +2,6 @@ package com.pwa.model;
 
 import com.pwa.builder.UserBuilder;
 import org.joda.time.DateTime;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -37,8 +36,7 @@ public class UserTest {
 
         assertEquals("User:id", user.toString());
         User copyUser = user;
-        assertEquals(copyUser.toJsonString()
-            ,user.toJsonString());
+        assertEquals(copyUser.toJsonString(), user.toJsonString());
         assertEquals(user.hashCode(), copyUser.hashCode());
         assertTrue(user.equals(copyUser));
 
