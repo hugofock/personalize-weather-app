@@ -9,8 +9,11 @@ Twitter Bootstrap, AngularJS
 ### Back-end
 Spring Framework (4.2.6.RELEASE), Spring Data JPA (1.9.1.RELEASE), Spring Web MVC (4.2.6 RELEASE), Spring Security (4.0.3.RELEASE), Hibernate (4.2.21.Final), Hibernate Validator (5.3.0.Alpha1)
 
-### Testing Framework
+### Back-end Testing Framework
 Mockito (1.9.5), Junit (4.11), Spring Framework (4.2.6.RELEASE)
+
+### UI Testing Plugin
+phantomjs-maven-plugin (0.4), jasmine-maven-plugin (1.3.1.5)
 
 ### Build Tool
 Maven (3.3.9)
