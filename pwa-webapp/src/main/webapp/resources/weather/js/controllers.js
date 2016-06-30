@@ -1,5 +1,5 @@
 'use strict';
-angular.module("pwaApp").controller("AppController", function($scope, $http) {
+angular.module("pwaApp").controller("pwaCtrl", function($scope, $http) {
 
     $scope.infoError = "";
 
@@ -9,11 +9,12 @@ angular.module("pwaApp").controller("AppController", function($scope, $http) {
         }
         else if (data.status === "Failure") {
             $scope.infoError = data.message;
-        } else {
-            $scope.infoError = "Unknown error";
         }
-    });
+    }).error(function()
+    {
+        $scope.infoError = 'Server Request Error';
 
+    });
 
     $scope.onWeatherFind = function() {
 
@@ -25,9 +26,11 @@ angular.module("pwaApp").controller("AppController", function($scope, $http) {
                 }
                 else if (data.status === "Failure") {
                     $scope.infoError = data.message;
-                } else {
-                    $scope.infoError = "Unknown error";
                 }
+            }).error(function()
+            {
+                $scope.infoError = 'Server Request Error';
+
             });
         } else {
             $scope.infoError = "Please select a city then click the search button";

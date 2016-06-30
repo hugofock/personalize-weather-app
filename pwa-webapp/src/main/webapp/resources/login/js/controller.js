@@ -1,7 +1,5 @@
 'use strict';
-angular.module("pwaApp").controller('LoginCtrl', function($scope, $http) {
-
-    $scope.response = {};
+angular.module("pwaApp").controller('LoginCtrl', function($scope, $http, $window) {
 
     $scope.onLogin = function() {
 
@@ -30,13 +28,17 @@ angular.module("pwaApp").controller('LoginCtrl', function($scope, $http) {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             }
-        }).then(function(response) {
-            if (response.data.status === 'Success' && !response.data.message) {
-                window.location.href = response.data.url;
+        }).success(function(data) {
+            if (data.status === 'Success' && !data.message) {
+                $window.location.href = data.url;
             }
             else {
-                $scope.errorInfo = response.data.message;
+                $scope.errorInfo = data.message;
             }
+
+        }).error(function()
+        {
+            $scope.infoError = 'Server Request Error';
 
         });
     }
